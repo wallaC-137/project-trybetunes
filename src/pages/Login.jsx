@@ -10,7 +10,7 @@ class Login extends React.Component {
     loading: false,
   };
 
-  hendleSaveState = ({ target }) => {
+  handleSaveState = ({ target }) => {
     const { name, value } = target;
     this.setState({
       [name]: value,
@@ -52,7 +52,7 @@ class Login extends React.Component {
               name="name"
               id="name"
               data-testid="login-name-input"
-              onChange={ this.hendleSaveState }
+              onChange={ this.handleSaveState }
             />
           </label>
           <input
