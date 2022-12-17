@@ -7,6 +7,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* apagar o body abaixo */
+body {
+  background-color: rgb(30, 30, 30);
+  color: lightgray;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
