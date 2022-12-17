@@ -6,6 +6,7 @@ import Loading from './Loading';
 class MusicCard extends React.Component {
   state = {
     load: false,
+    favoriteState: false,
   };
 
   myFavorite = async (param) => {
@@ -14,9 +15,16 @@ class MusicCard extends React.Component {
     this.setState({ load: false });
   };
 
+  handleSaveState = ({ target }) => {
+    const { checked } = target;
+    this.setState({
+      favoriteState: checked,
+    });
+  };
+
   render() {
-    const { trackName, previewUrl, trackId } = this.props;
-    const { load } = this.state;
+    const { trackName, previewUrl, trackId, isFavorite } = this.props;
+    const { load, favoriteState } = this.state;
 
     return (
       <div>
@@ -34,9 +42,11 @@ class MusicCard extends React.Component {
             <input
               type="checkbox"
               name="favorite"
+              checked={ favoriteState || isFavorite }
               id={ trackId }
               data-testid={ `checkbox-music-${trackId}` }
               onChange={ () => this.myFavorite({ trackName, previewUrl }) }
+              onClick={ this.handleSaveState }
             />
             Favorita
           </label>)}
@@ -48,6 +58,8 @@ class MusicCard extends React.Component {
 MusicCard.propTypes = {
   trackName: PropType.string,
   previewUrl: PropType.string,
+  trackId: PropType.string,
+  isFavorite: PropType.bool,
 }.isRequired;
 
 export default MusicCard;
