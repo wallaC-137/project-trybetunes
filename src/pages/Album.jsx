@@ -29,12 +29,12 @@ class Album extends React.Component {
     });
   }
 
-  async componentDidUpdate() {
-    const checkFav = await this.checkFavorite();
-    this.setState({
-      favorits: checkFav,
-    });
-  }
+  // async componentDidUpdate() {
+  //   const checkFav = await this.checkFavorite();
+  //   this.setState({
+  //     favorits: checkFav,
+  //   });
+  // }
 
   checkFavorite = async () => {
     const resultGetFav = await getFavoriteSongs('favorite_songs');

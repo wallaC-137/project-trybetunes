@@ -19,7 +19,6 @@ class MusicCard extends React.Component {
   myFavorite = async (param) => {
     const { favoriteState } = this.state;
 
-    console.log(favoriteState);
     this.setState({ load: true });
     if (favoriteState) await addSong(param);
     if (!favoriteState) await removeSong(param);
@@ -27,10 +26,13 @@ class MusicCard extends React.Component {
   };
 
   handleSaveState = ({ target: { checked } }) => {
-    const { trackName, previewUrl, trackId } = this.props;
+    const { trackName, previewUrl, trackId, isTrue, recoverySaves } = this.props;
     this.setState({
       favoriteState: checked,
-    }, () => this.myFavorite({ trackName, previewUrl, trackId }));
+    }, async () => {
+      this.myFavorite({ trackName, previewUrl, trackId });
+      if (isTrue) await recoverySaves();
+    });
   };
 
   render() {

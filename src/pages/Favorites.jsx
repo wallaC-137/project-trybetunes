@@ -8,32 +8,23 @@ class Favorites extends React.Component {
   state = {
     load: true,
     result: [],
-    favorit: true,
   };
 
   async componentDidMount() {
-    const resultApi = await getFavoriteSongs();
-    // const checkFav = await checkFavorite();
+    this.recoverySaves();
+  }
 
-    console.log(resultApi);
+  recoverySaves = async () => {
+    const resultApi = await getFavoriteSongs();
+
     this.setState({
       result: resultApi,
       load: false,
-      // favorit: true,
     });
-  }
-
-  async componentDidUpdate() {
-    const resultApi = await getFavoriteSongs();
-
-    this.setState({
-      result: resultApi,
-      // favorit: true,
-    });
-  }
+  };
 
   render() {
-    const { load, result, favorit } = this.state;
+    const { load, result } = this.state;
 
     return (
       <div data-testid="page-favorites">
@@ -42,7 +33,9 @@ class Favorites extends React.Component {
         { (result || []).map((music) => (<MusicCard
           key={ music.trackId }
           { ...music }
-          isFavorite={ favorit }
+          recoverySaves={ this.recoverySaves }
+          isTrue
+          isFavorite
         />))}
       </div>
     );
